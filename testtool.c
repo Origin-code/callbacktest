@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <omp-tools.h>
+#include <assert.h>
 
 void my_thread_start_callback(ompt_thread_t thread_type, ompt_data_t* data) {
         switch(thread_type) {
@@ -22,7 +23,7 @@ void my_thread_end_callback(ompt_data_t* data) {
         printf("Thread ends\n");
 }
 
-int ompt_initialize(ompt_function_lookup_t lookup, ompt_data_t* data) {
+int ompt_initialize(ompt_function_lookup_t lookup, int initial_device_num, ompt_data_t* data) {
         ompt_set_callback_t ompt_set_callback = (ompt_set_callback_t)(lookup("ompt_set_callback"));
         assert(ompt_set_callback != NULL);
 
