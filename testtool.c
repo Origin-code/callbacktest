@@ -35,7 +35,7 @@ int ompt_initialize(ompt_function_lookup_t lookup, int initial_device_num, ompt_
         result = ompt_set_callback(ompt_callback_thread_end, (ompt_callback_t)(my_thread_end_callback));
         assert(result == ompt_set_always);
 
-        return 0;
+        return 1;
 }
 
 void ompt_finalize(ompt_data_t* data) {
