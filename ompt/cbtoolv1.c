@@ -23,36 +23,51 @@ void my_thread_end_callback(ompt_data_t* data) {
     printf("Thread ends\n");
 }
 
-void ompt_callback_task_create(
+void my_task_create_callback(
     ompt_data_t *encountering_task_data,
-    const omp_frame_t *encountering_task_frame,
+    const ompt_frame_t *encountering_task_frame,
     ompt_data_t *new_task_data,
     int flags,
     int has_dependences,
     const void *codeptr_ra)
 {
         switch (flags) {
+                case ompt_task_initial:
+                        printf("initial task\n");
+                        break;
+                case ompt_task_implicit:
+                        printf("implicit task\n");
+                        break;
+                case ompt_task_target:
+                        printf("target task\n");
+                        break;
+                case ompt_task_taskwait:
+                        printf("taskwait task\n");
+                        break;
                 case ompt_task_explicit:
-                    printf("explicit task\n");
-                    break;
+                        printf("explicit task\n");
+                        break;
                 case ompt_task_undeferred:
-                    printf("undeferred task\n");
-                    break;
+                        printf("undeferred task\n");
+                        break;
                 case ompt_task_final:
-                    printf("task is final\n");
-                    break;
+                        printf("task is final\n");
+                        break;
                 case ompt_task_untied:
-                    printf("task is untied\n");
-                    break;
+                        printf("task is untied\n");
+                        break;
                 case ompt_task_mergeable:
-                    printf("task is mergeable\n");
-                    break;
+                        printf("task is mergeable\n");
+                        break;
                 case ompt_task_merged:
-                    printf("task is merged\n");
-                    break;
+                        printf("task is merged\n");
+                        break;
                 default:
-                    printf("unknown task type\n");
-                    break;
+                        printf("unknown task type\n");
+                //      printf("new_task_data: %d\n", new_task_data);
+                        printf("flags: %u\n", (unsigned int)flags);
+                        printf("Size of flags: %zu bytes\n", sizeof(flags));
+                        break;
     }
 }
 
